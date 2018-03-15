@@ -9,7 +9,15 @@ const initialState : KanbanState = {
     columns: [
       {
         id: 1,
-        name: "ToDo"
+        name: "Todo"
+      },
+      {
+        id: 1,
+        name: "Doing"
+      },
+      {
+        id: 1,
+        name: "Done"
       }
     ],
     topicBeingCreated: false

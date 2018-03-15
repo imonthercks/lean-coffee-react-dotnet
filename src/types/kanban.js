@@ -6,7 +6,8 @@ export type TopicName = string;
 export type ColumnId = number;
 
 export type KanbanColumn = {
-    id: ColumnId
+    id: ColumnId,
+    name: string
 };
 
 export type KanbanColumns = Array<KanbanColumn>;

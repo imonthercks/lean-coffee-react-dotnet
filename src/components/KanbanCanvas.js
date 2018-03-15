@@ -15,7 +15,7 @@ const KanbanCanvas = ({ columns, onColumnClick }: Props) => (
   <ul>
     {columns.map(column => (
       <div key={column.id} {...column} onClick={() => onColumnClick(column.id)}>
-        {column.id}
+        {column.name}
       </div>
     ))}
   </ul>
