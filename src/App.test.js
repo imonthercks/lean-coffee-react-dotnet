@@ -4,7 +4,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 
-import reducer from './modules'
+import reducer from './reducers'
 
 it('renders without crashing', () => {
   const store = createStore(reducer);
