@@ -6,7 +6,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux'
 
-import reducer from './modules'
+import reducer from './reducers'
 
 import './index.css';
 
