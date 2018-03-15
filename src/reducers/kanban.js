@@ -9,14 +9,14 @@ const initialState : KanbanState = {
     columns: [
       {
         id: 1,
-        name: "Todo"
+        name: "To Discuss"
       },
       {
-        id: 1,
-        name: "Doing"
+        id: 2,
+        name: "Discussing"
       },
       {
-        id: 1,
+        id: 3,
         name: "Done"
       }
     ],
