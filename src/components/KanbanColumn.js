@@ -2,9 +2,10 @@
 
 import React from 'react';
 
-//import Todo from './Todo';
-
 import type {Column} from '../types/kanban';
+import { Droppable } from 'react-beautiful-dnd';
+import KanbanTopic from './KanbanTopic';
+
 import './KanbanColumn.css';
 
 export type Props = {
@@ -14,12 +15,15 @@ export type Props = {
 const KanbanColumn = ({ column }: Props) => (
   <div className='kanban-column'>
     <div className='kanban-column-header'>{column.name}</div>
-    {column.topics.map((topic, index) => (
-      <div key={topic.id} {...topic} className='kanban-topic'>
-        <div className='kanban-topic-name'>{topic.name}</div>
-        <div className='kanban-topic-description'>{topic.description}</div>
-      </div>
-    ))}
+    <Droppable droppableId={column.id}>
+      {(provided, snapshot) => (
+        <div ref={provided.innerRef} className='kanban-topic-container'>
+          {column.topics.map((topic, index) => (
+            <KanbanTopic topic={topic} index={index} />
+          ))}
+        </div>
+      )}
+    </Droppable>
   </div>
 );
 

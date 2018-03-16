@@ -1,0 +1,13 @@
+.kanban-topic{
+    margin: 5px;
+    border: solid black 1px;
+}
+
+.kanban-topic-name{
+    background-color: darkblue;
+    color: wheat;
+}
+
+.kanban-topic-description{
+    background-color: white;
+}

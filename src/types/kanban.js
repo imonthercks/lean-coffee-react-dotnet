@@ -9,8 +9,18 @@ export type Topic = {
   description: string
 };
 
+export type TopicStartPosition = {
+  columnId: string,
+  verticalIndex: number
+};
+
+export type TopicEndPosition = {
+  columnId: ?string,
+  verticalIndex: ?number
+};
+
 export type Topics = Array<Topic>;
-export type ColumnId = number;
+export type ColumnId = string;
 
 export type Column = {
     id: ColumnId,
@@ -26,4 +36,5 @@ export type KanbanState = {
 
 export type KanbanAction =
   | { type: 'kanban/CREATE_TOPIC', id: TopicId, name: TopicName }
-  | { type: 'kanban/TOPIC_CREATED', id: TopicId };
+  | { type: 'kanban/TOPIC_CREATED', id: TopicId }
+  | { type: 'kanban/MOVE_TOPIC', from: TopicStartPosition, to: TopicEndPosition};

@@ -1,6 +1,6 @@
 // @flow
 
-import type { TopicId, TopicName, KanbanAction } from '../types/kanban';
+import type { TopicId, TopicName, TopicStartPosition, TopicEndPosition, KanbanAction } from '../types/kanban';
 
 export const createTopic = (id: TopicId, name: TopicName): KanbanAction => {
     return {
@@ -10,6 +10,13 @@ export const createTopic = (id: TopicId, name: TopicName): KanbanAction => {
     };
 };
 
+export const moveTopic = (from: TopicStartPosition, to: TopicEndPosition): KanbanAction => {
+    return {
+        type: 'kanban/MOVE_TOPIC',
+        from,
+        to
+    };
+};
 //   return dispatch => {
 //     dispatch({
 //         type: CREATE_TOPIC,
