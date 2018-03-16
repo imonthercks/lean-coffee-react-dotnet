@@ -9,15 +9,46 @@ const initialState : KanbanState = {
     columns: [
       {
         id: 1,
-        name: "To Discuss"
+        name: "To Discuss",
+        topics: [
+          {
+            id: 'a',
+            name: 'test',
+            description: 'test description'
+          },
+          {
+            id: 'b',
+            name: 'test2',
+            description: 'test description2'
+          },
+          {
+            id: 'c',
+            name: 'test3',
+            description: 'test description3'
+          }
+        ]
       },
       {
         id: 2,
-        name: "Discussing"
+        name: "Discussing",
+        topics: [
+          {
+            id: 'd',
+            name: 'test4',
+            description: 'test description4'
+          }
+        ]
       },
       {
         id: 3,
-        name: "Done"
+        name: "Done",
+        topics: [
+          {
+            id: 'e',
+            name: 'test5',
+            description: 'test description5'
+          }
+        ]
       }
     ],
     topicBeingCreated: false

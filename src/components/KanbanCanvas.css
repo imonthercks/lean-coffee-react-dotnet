@@ -10,5 +10,6 @@
 }
 
 .kanban-column {
-    background-color: aqua;
+    background-color: lightgrey;
+    border: solid darkgray 1px;
 }

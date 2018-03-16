@@ -3,16 +3,24 @@
 export type TopicId = string;
 export type TopicName = string;
 
-export type ColumnId = number;
-
-export type KanbanColumn = {
-    id: ColumnId,
-    name: string
+export type Topic = {
+  id: TopicId,
+  name: TopicName,
+  description: string
 };
 
-export type KanbanColumns = Array<KanbanColumn>;
+export type Topics = Array<Topic>;
+export type ColumnId = number;
+
+export type Column = {
+    id: ColumnId,
+    name: string,
+    topics : Topics
+};
+
+export type Columns = Array<Column>;
 export type KanbanState = {
-  columns: KanbanColumns,
+  columns: Columns,
   topicBeingCreated: boolean
 };
 
