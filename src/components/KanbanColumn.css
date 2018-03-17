@@ -1,7 +1,17 @@
 .kanban-column{
+    display: flex;
+    flex-direction: column;
 }
 
 .kanban-column-header{
     background-color: black;
     color: wheat;
+}
+
+.kanban-topic-container{
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    border: solid darkgray 1px;
+    min-height: 150px;
 }

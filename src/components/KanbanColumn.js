@@ -19,7 +19,7 @@ const KanbanColumn = ({ column }: Props) => (
       {(provided, snapshot) => (
         <div ref={provided.innerRef} className='kanban-topic-container'>
           {column.topics.map((topic, index) => (
-            <KanbanTopic topic={topic} index={index} />
+            <KanbanTopic key={topic.id} topic={topic} index={index} />
           ))}
         </div>
       )}

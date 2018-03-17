@@ -54,7 +54,7 @@ const KanbanCanvas = ({ columns, onColumnClick, onMoveTopic }: Props) => (
   <DragDropContext onDragEnd={onMoveTopic}>
   <div className='kanban-canvas'>
     {columns.map((column, index) => (
-      <div key={column.id} {...column} onClick={() => onColumnClick(column.id)} className='kanban-column' style={getGridStyle(index)}>
+      <div key={column.id} {...column} onClick={() => onColumnClick(column.id)} className='kanban-column-container' style={getGridStyle(index)}>
         <KanbanColumn column={column} />
       </div>
     ))}

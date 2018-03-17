@@ -16,7 +16,7 @@ export type TopicStartPosition = {
 
 export type TopicEndPosition = {
   columnId: ?string,
-  verticalIndex: ?number
+  verticalIndex: number
 };
 
 export type Topics = Array<Topic>;

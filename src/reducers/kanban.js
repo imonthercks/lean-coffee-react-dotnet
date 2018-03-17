@@ -1,5 +1,5 @@
 // @flow
-import type { KanbanState, Columns } from '../types/kanban';
+import type { KanbanState, Columns, Column } from '../types/kanban';
 import type { Action } from '../types';
 
 export const CREATE_TOPIC = 'kanban/CREATE_TOPIC';
@@ -70,11 +70,14 @@ export default (state : KanbanState = initialState, action : Action) => {
         topicBeingCreated: false
       };
     case MOVE_TOPIC:
-      let newColumns = (Array : Columns).from(state.columns);
+      let newColumns = (Array.from(state.columns) : Columns);
       const fromPosition = action.from;
       const toPosition = action.to;
-      const fromColumn = newColumns.find(column => column.id === fromPosition.columnId);
-      const toColumn = newColumns.find(column => column.id === toPosition.columnId);
+      const fromColumn = (newColumns.find(column => column.id === fromPosition.columnId) : ?Column);
+      const toColumn = (newColumns.find(column => column.id === toPosition.columnId) : ?Column);
+
+      if (fromColumn == null || toColumn == null)
+        return state;
 
       const [movingTopic] = fromColumn.topics.splice(action.from.verticalIndex, 1);
       toColumn.topics.splice(action.to.verticalIndex, 0, movingTopic)
