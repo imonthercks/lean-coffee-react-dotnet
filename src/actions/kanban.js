@@ -17,17 +17,3 @@ export const moveTopic = (from: TopicStartPosition, to: TopicEndPosition): Kanba
         to
     };
 };
-//   return dispatch => {
-//     dispatch({
-//         type: CREATE_TOPIC,
-//         id,
-//         name
-//       });
-  
-//       return setTimeout(() => {
-//         dispatch({
-//           type: TOPIC_CREATED,
-//           id
-//         });
-//       }, 3000);
-//     };

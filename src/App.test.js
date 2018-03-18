@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 
 import reducer from './reducers'
 
-it('renders without crashing', () => {
+test('renders without crashing', () => {
   const store = createStore(reducer);
   const div = document.createElement('div');
   ReactDOM.render(
