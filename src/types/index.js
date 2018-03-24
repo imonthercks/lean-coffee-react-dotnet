@@ -7,7 +7,8 @@ import type { KanbanState, KanbanAction } from './kanban';
 export type ReduxInitAction = { type: '@@INIT' };
 
 export type State = {
-    kanban: KanbanState
+    kanban: KanbanState,
+    router: any
 };
 
 export type Action = ReduxInitAction | KanbanAction;
