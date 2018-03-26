@@ -1,20 +1,23 @@
 import { moveTopic } from '../actions/kanban'
 import reduce, { MOVE_TOPIC } from './kanban'
 
-
-
 test('MOVE_TOPIC changes column topic is displayed in', () => {
     // Given initial state
     let initialState : KanbanState = {
+        topics: [
+          {
+            id: 'a',
+            name: 'test',
+            description: 'test description'
+          }
+        ],
         columns: [
           {
             id: "1",
             name: "To Discuss",
             topics: [
               {
-                id: 'a',
-                name: 'test',
-                description: 'test description'
+                id: 'a'
               }
             ]
           },
@@ -24,7 +27,7 @@ test('MOVE_TOPIC changes column topic is displayed in', () => {
             topics: []
           }
         ],
-        topicBeingCreated: false
+        topicBeingUpdated: false
     };
     
     // When action is reduced
@@ -48,15 +51,30 @@ test('MOVE_TOPIC changes column topic is displayed in', () => {
 test('MOVE_TOPIC positions topic in new column correctly', () => {
     // Given initial state
     let initialState : KanbanState = {
+      topics: [
+        {
+          id: 'a',
+          name: 'test',
+          description: 'test description'
+        },
+        {
+          id: 'b',
+          name: 'test',
+          description: 'test description'
+        },
+        {
+          id: 'c',
+          name: 'test',
+          description: 'test description'
+        }
+      ],
         columns: [
           {
             id: "1",
             name: "To Discuss",
             topics: [
               {
-                id: 'a',
-                name: 'test',
-                description: 'test description'
+                id: 'a'
               }
             ]
           },
@@ -65,20 +83,16 @@ test('MOVE_TOPIC positions topic in new column correctly', () => {
             name: "Discussing",
             topics: [
                 {
-                  id: 'b',
-                  name: 'test',
-                  description: 'test description'
+                  id: 'b'
                 },
                 {
-                  id: 'c',
-                  name: 'test',
-                  description: 'test description'
+                  id: 'c'
                 }
               
               ]
           }
         ],
-        topicBeingCreated: false
+        topicBeingUpdated: false
     };
 
     // When action is reduced

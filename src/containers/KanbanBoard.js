@@ -10,7 +10,8 @@ import type { DropResult } from 'react-beautiful-dnd';
 
 const mapStateToProps = (state: State) => {
   return {
-    columns: state.kanban.columns
+    columns: state.kanban.columns,
+    topics: state.kanban.topics
   };
 };
 

@@ -4,30 +4,52 @@ import type { Action } from '../types';
 
 export const CREATE_TOPIC = 'kanban/CREATE_TOPIC';
 export const TOPIC_CREATED = 'kanban/TOPIC_CREATED';
+export const EDIT_TOPIC = 'kanban/EDIT_TOPIC';
+export const TOPIC_UPDATED = 'kanban/TOPIC_UPDATED';
 export const MOVE_TOPIC = 'kanban/MOVE_TOPIC';
 export const TOPIC_MOVED = 'kanban/TOPIC_MOVED';
 
 const initialState : KanbanState = {
+    topics: [
+      {
+        id: 'a',
+        name: 'test',
+        description: 'test description'
+      },
+      {
+        id: 'b',
+        name: 'test2',
+        description: 'test description2'
+      },
+      {
+        id: 'c',
+        name: 'test3',
+        description: 'test description3'
+      },
+      {
+        id: 'd',
+        name: 'test4',
+        description: 'test description4'
+      },
+      {
+        id: 'e',
+        name: 'test5',
+        description: 'test description5'
+      }
+    ],
     columns: [
       {
         id: "1",
         name: "To Discuss",
         topics: [
           {
-            id: 'a',
-            name: 'test',
-            description: 'test description'
+            id: 'a'
           },
           {
-            id: 'b',
-            name: 'test2',
-            description: 'test description2'
+            id: 'b'
           },
           {
-            id: 'c',
-            name: 'test3',
-            description: 'test description3'
-          }
+            id: 'c'          }
         ]
       },
       {
@@ -35,9 +57,7 @@ const initialState : KanbanState = {
         name: "Discussing",
         topics: [
           {
-            id: 'd',
-            name: 'test4',
-            description: 'test description4'
+            id: 'd'
           }
         ]
       },
@@ -46,28 +66,47 @@ const initialState : KanbanState = {
         name: "Done",
         topics: [
           {
-            id: 'e',
-            name: 'test5',
-            description: 'test description5'
+            id: 'e'
           }
         ]
       }
     ],
-    topicBeingCreated: false
+    topicBeingUpdated: false
 };
+
+const ID = () => {
+  let array = new Uint32Array(8)
+  window.crypto.getRandomValues(array)
+  let str = ''
+  for (let i = 0; i < array.length; i++) {
+    str += (i < 2 || i > 5 ? '' : '-') + array[i].toString(16).slice(-4)
+  }
+  return str
+}
 
 export default (state : KanbanState = initialState, action : Action) => {
   switch (action.type) {
     case CREATE_TOPIC:
       return {
         ...state,
-        topicBeingCreated: true
+        topics: [...state.topics, {id: ID(), name: action.name, description: action.description}],
+        topicBeingUpdated: true
       };
 
     case TOPIC_CREATED:
       return {
         ...state,
-        topicBeingCreated: false
+        topicBeingUpdated: false
+      };
+    case EDIT_TOPIC:
+      return {
+        ...state,
+        topicBeingUpdated: true
+      };
+    case TOPIC_UPDATED:
+      return {
+        ...state,
+        topicBeingUpdated: false
       };
     case MOVE_TOPIC:
       let newColumns = (Array.from(state.columns) : Columns);
