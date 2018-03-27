@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import type { Topic, TopicId, TopicName } from '../types/kanban'
+import type { Topic, TopicId, TopicName } from '../../types/kanban'
 
 import './TopicForm.css';
 
@@ -19,24 +19,42 @@ type State = {
 
 class TopicForm extends React.Component<Props, State>{
 
-  state = {
-    name: "",
-    description: ""
+  constructor(props : Props){
+    super(props)
+
+    if (props.topic == null){
+      this.state = {
+        id: "",
+        name: "",
+        description: ""
+      }
+    }
+    else {
+      this.state = {
+        id: props.topic.id,
+        name: props.topic.name,
+        description: props.topic.description
+      }
+    }
   }
 
-  handleInputChange = (event: SyntheticEvent<KeyboardEvent>) => {
+  handleInputChange = (event: Event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    if (target instanceof HTMLInputElement) {
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+      this.setState({
+        [name]: value
+      });
+    }
   }
+    
 
-  handleSubmit = (event: SyntheticEvent<Event>) => {
+  handleSubmit = (event: Event) => {
     event.preventDefault();
     this.props.onSubmitTopic({
+      id: this.state.id,
       name: this.state.name,
       description: this.state.description
     })
@@ -46,6 +64,7 @@ class TopicForm extends React.Component<Props, State>{
     return (
       <div>
       <form onSubmit={this.handleSubmit}>
+        <input type="hidden" name="id" value={this.state.id} />
         <div>
           <label>
             Topic Name:
