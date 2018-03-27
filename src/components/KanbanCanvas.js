@@ -4,7 +4,7 @@ import React from 'react';
 
 //import Todo from './Todo';
 
-import type { Columns, ColumnId } from '../types/kanban';
+import type { Columns, ColumnId, Topics} from '../types/kanban';
 import { DragDropContext } from 'react-beautiful-dnd';
 import KanbanColumn from './KanbanColumn';
 import type { DropResult } from 'react-beautiful-dnd';

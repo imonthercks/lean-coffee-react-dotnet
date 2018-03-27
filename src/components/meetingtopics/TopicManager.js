@@ -3,7 +3,7 @@
 import React from 'react';
 import TopicCard from './TopicCard'
 import TopicForm from './TopicForm'
-import type { Topics, Topic } from '../types/kanban'
+import type { Topics, Topic } from '../../types/kanban'
 
 import './TopicManager.css';
 
@@ -35,12 +35,18 @@ class TopicManager extends React.Component<Props, State>{
     }));
   }
 
+  cancel = () => {
+    this.setState(prevState => ({
+      mode: "View",
+    }))
+  }
+
   render(){
 
     const isAdding = this.state.mode === "Add";
     
     const topicForm = isAdding ? (
-      <TopicForm onSubmitTopic={this.addTopic}/>
+      <TopicForm topic={null} onSubmitTopic={this.addTopic} onCancel={this.cancel}/>
     ) : (
       <div><button onClick={this.showAddForm}>Add Topic</button></div>
     );

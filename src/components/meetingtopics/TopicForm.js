@@ -7,8 +7,9 @@ import type { Topic, TopicId, TopicName } from '../../types/kanban'
 import './TopicForm.css';
 
 type Props = {
-  topic: Topic,
-  onSubmitTopic: (topic: Topic) => void
+  topic: ?Topic,
+  onSubmitTopic: (topic: Topic) => void,
+  onCancel: () => void
 };
 
 type State = {
@@ -19,10 +20,10 @@ type State = {
 
 class TopicForm extends React.Component<Props, State>{
 
-  constructor(props : Props){
+  constructor(props: Props) {
     super(props)
 
-    if (props.topic == null){
+    if (props.topic == null) {
       this.state = {
         id: "",
         name: "",
@@ -49,7 +50,6 @@ class TopicForm extends React.Component<Props, State>{
       });
     }
   }
-    
 
   handleSubmit = (event: Event) => {
     event.preventDefault();
@@ -60,34 +60,39 @@ class TopicForm extends React.Component<Props, State>{
     })
   }
 
+  cancel = (event: SyntheticEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    this.props.onCancel();
+  }
+
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
-        <input type="hidden" name="id" value={this.state.id} />
-        <div>
-          <label>
-            Topic Name:
+        <form onSubmit={this.handleSubmit}>
+          <input type="hidden" name="id" value={this.state.id} />
+          <div>
+            <label>
+              Topic Name:
             <input
-              name="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.handleInputChange} />
-          </label>
-        </div>
-        <div>
-          <label>
-           Topic Description:
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleInputChange} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Topic Description:
             <input
-              name="description"
-              type="text"
-              value={this.state.description}
-              onChange={this.handleInputChange} />
-          </label>
-        </div>
-        <div><button type="submit">Submit</button></div>
-      </form>
-    </div>
+                name="description"
+                type="text"
+                value={this.state.description}
+                onChange={this.handleInputChange} />
+            </label>
+          </div>
+          <div><button type="submit">Submit</button> <button onClick={this.cancel}>Cancel</button></div>
+        </form>
+      </div>
     )
   }
 }

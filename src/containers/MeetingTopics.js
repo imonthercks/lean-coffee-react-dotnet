@@ -5,6 +5,7 @@ import { createTopic, editTopic } from '../actions/kanban'
 
 import TopicManager from '../components/meetingtopics/TopicManager'
 import type { State, Dispatch,  } from '../types';
+import type { Topic } from '../types/kanban'
 
 const mapStateToProps = (state: State) => {
   return {
@@ -23,20 +24,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
           dispatch(editTopic(topic))
       }
     }
-    // onMoveTopic: (location: DropResult) => {
-    //   let destinationColumnId = (location.destination == null ? null : location.destination.droppableId);
-    //   let destinationVerticalId = (location.destination == null ? -1 : location.destination.index);
-    
-    //   dispatch(moveTopic({ 
-    //       columnId: location.source.droppableId, 
-    //       verticalIndex: location.source.index
-    //     },
-    //     { 
-    //       columnId: destinationColumnId, 
-    //       verticalIndex: destinationVerticalId
-    //     }
-    //   ));
-    // }
   };
 };
 

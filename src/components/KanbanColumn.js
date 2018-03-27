@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import type {Column} from '../types/kanban';
+import type {Column, Topics, Topic, TopicId} from '../types/kanban';
 import { Droppable } from 'react-beautiful-dnd';
 import KanbanTopic from './KanbanTopic';
 
@@ -13,8 +13,9 @@ export type Props = {
   topics: Topics
 };
 
-const getTopic = (topics, id) => {
-  return topics.find((item) => item.id === id);
+const getTopic = (topics: Topics, id: TopicId): Topic => {
+  let topic = topics.find((item) => item.id === id);
+  return topic || {id: "", name: "", description: ""};
 }
 
 const KanbanColumn = ({ column, topics }: Props) => (

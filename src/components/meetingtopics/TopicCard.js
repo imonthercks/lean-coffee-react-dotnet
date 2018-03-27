@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import type {Topic} from '../types/kanban';
+import type {Topic} from '../../types/kanban';
 
 export type Props = {
   topic: Topic,
