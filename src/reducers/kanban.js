@@ -49,7 +49,8 @@ const initialState : KanbanState = {
             id: 'b'
           },
           {
-            id: 'c'          }
+            id: 'c'          
+          }
         ]
       },
       {
@@ -98,17 +99,30 @@ export default (state : KanbanState = initialState, action : Action) => {
       if (column != null)
         column.topics.push({id: newId})
       
-        return result;
+      return result;
     case TOPIC_CREATED:
       return {
         ...state,
         topicBeingUpdated: false
       };
     case EDIT_TOPIC:
-      return {
+      let editResult = {
         ...state,
         topicBeingUpdated: true
       };
+
+      if (action.topic == null)
+        return editResult;
+
+      let oldTopic = action.topic;
+      let topic = editResult.topics.find((item) => item.id === oldTopic.id);
+
+      if (topic != null){
+        topic.name = oldTopic.name;
+        topic.description = oldTopic.description;
+      }
+
+      return editResult;
     case TOPIC_UPDATED:
       return {
         ...state,

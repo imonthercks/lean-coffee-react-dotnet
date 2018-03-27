@@ -3,7 +3,7 @@
 import React from 'react';
 import TopicCard from './TopicCard'
 import TopicForm from './TopicForm'
-import type { Topics, Topic } from '../../types/kanban'
+import type { Topics, Topic, TopicId } from '../../types/kanban'
 
 import './TopicManager.css';
 
@@ -14,12 +14,14 @@ type Props = {
 };
 
 type State = {
-  mode: string
+  mode: string,
+  selectedTopicId: TopicId
 };
 
 class TopicManager extends React.Component<Props, State>{
   state = {
-    mode: "View"
+    mode: "View",
+    selectedTopicId: ""
   }
 
   showAddForm = (event: SyntheticEvent<HTMLButtonElement>) => {
@@ -28,12 +30,19 @@ class TopicManager extends React.Component<Props, State>{
     }));
   }
 
-  addTopic = (topic: Topic) => {
+  updateTopic = (topic: Topic) => {
     this.props.onEditTopic(topic);
 
     this.setState(prevState => ({
       mode: "View",
     }));
+  }
+
+  showEditForm = (topic: Topic) => {
+    this.setState(prevState => ({
+      selectedTopicId: topic.id,
+      mode: "Edit",
+    }))
   }
 
   cancel = () => {
@@ -42,15 +51,33 @@ class TopicManager extends React.Component<Props, State>{
     }))
   }
 
+  isSelected = (topic: Topic) : boolean => {
+    return this.state.selectedTopicId === topic.id;
+  }
+
   render(){
 
-    const isAdding = this.state.mode === "Add";
-    
-    const topicForm = isAdding ? (
-      <TopicForm topic={null} onSubmitTopic={this.addTopic} onCancel={this.cancel}/>
-    ) : (
-      <div><button onClick={this.showAddForm}>Add Topic</button><button onClick={this.props.onBackToHome}>Back to Home</button></div>
+    let topicForm = (
+      <div>There was an issue rendering the control bar for this screen</div>
     );
+
+    switch (this.state.mode){
+      case "Add":
+        topicForm = (
+          <TopicForm topic={null} onSubmitTopic={this.updateTopic} onCancel={this.cancel}/>
+        )
+        break;
+      case "Edit":
+        topicForm = (
+          <TopicForm topic={this.props.topics.find((item) => item.id === this.state.selectedTopicId)} onSubmitTopic={this.updateTopic} onCancel={this.cancel}/>
+        )
+        break;
+      default:
+        topicForm = (
+          <div><button onClick={this.showAddForm}>Add Topic</button><button onClick={this.props.onBackToHome}>Back to Home</button></div>
+        )
+        break;
+    }
 
     return (
     <div>
@@ -59,7 +86,7 @@ class TopicManager extends React.Component<Props, State>{
         <div className='kanban-column-header'>Topics</div>
           <div className='kanban-topic-container'>
             {this.props.topics.map((topic, index) => (
-              <TopicCard key={topic.id} topic={topic} index={index} />
+              <TopicCard key={topic.id} topic={topic} index={index} selected={this.isSelected(topic)} onEdit={this.showEditForm} />
             ))}
           </div>
       </div>

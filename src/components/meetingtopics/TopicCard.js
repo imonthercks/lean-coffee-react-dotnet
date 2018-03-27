@@ -4,16 +4,28 @@ import React from 'react';
 
 import type {Topic} from '../../types/kanban';
 
-export type Props = {
+type Props = {
   topic: Topic,
-  index: number
+  selected: boolean,
+  index: number,
+  onEdit: (topic : Topic) => void
 };
 
-const TopicCard = ({ topic, index }: Props) => (
-    <div key={topic.id} {...topic} className='kanban-topic'>
-        <div className='kanban-topic-name'>{topic.name}</div>
-        <div className='kanban-topic-description'>{topic.description}</div>
-    </div>
-);
+class TopicCard extends React.Component<Props> {
+    onEditClicked = (event: SyntheticEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        this.props.onEdit(this.props.topic);
+    }
+
+    render() {
+        return (
+            <div key={this.props.topic.id} {...this.props.topic} className={ "kanban-topic " + (this.props.selected ? "kanban-topic-selected" : "")}>
+                <div className='kanban-topic-name'>{this.props.topic.name}</div>
+                <div className='kanban-topic-description'>{this.props.topic.description}</div>
+                <button onClick={this.onEditClicked}>Edit</button>
+            </div>
+        )
+    }
+}
 
 export default TopicCard;
