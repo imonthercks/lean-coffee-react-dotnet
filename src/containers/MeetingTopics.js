@@ -2,6 +2,7 @@
 
 import { connect } from 'react-redux';
 import { createTopic, editTopic } from '../actions/kanban'
+import { push } from 'react-router-redux'
 
 import TopicManager from '../components/meetingtopics/TopicManager'
 import type { State, Dispatch,  } from '../types';
@@ -23,6 +24,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       {
           dispatch(editTopic(topic))
       }
+    },
+    onBackToHome: () => {
+      dispatch(push("/"))
     }
   };
 };

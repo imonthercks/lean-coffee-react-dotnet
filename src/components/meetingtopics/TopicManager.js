@@ -9,7 +9,8 @@ import './TopicManager.css';
 
 type Props = {
   topics: Topics,
-  onEditTopic: (topic: Topic) => void
+  onEditTopic: (topic: Topic) => void,
+  onBackToHome: () => void
 };
 
 type State = {
@@ -48,7 +49,7 @@ class TopicManager extends React.Component<Props, State>{
     const topicForm = isAdding ? (
       <TopicForm topic={null} onSubmitTopic={this.addTopic} onCancel={this.cancel}/>
     ) : (
-      <div><button onClick={this.showAddForm}>Add Topic</button></div>
+      <div><button onClick={this.showAddForm}>Add Topic</button><button onClick={this.props.onBackToHome}>Back to Home</button></div>
     );
 
     return (

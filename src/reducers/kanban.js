@@ -39,7 +39,7 @@ const initialState : KanbanState = {
     ],
     columns: [
       {
-        id: "1",
+        id: "toDiscuss",
         name: "To Discuss",
         topics: [
           {
@@ -53,7 +53,7 @@ const initialState : KanbanState = {
         ]
       },
       {
-        id: "2",
+        id: "discussing",
         name: "Discussing",
         topics: [
           {
@@ -62,7 +62,7 @@ const initialState : KanbanState = {
         ]
       },
       {
-        id: "3",
+        id: "done",
         name: "Done",
         topics: [
           {
@@ -87,12 +87,18 @@ const ID = () => {
 export default (state : KanbanState = initialState, action : Action) => {
   switch (action.type) {
     case CREATE_TOPIC:
-      return {
+      const newId = ID();
+      let result = {
         ...state,
-        topics: [...state.topics, {id: ID(), name: action.name, description: action.description}],
+        topics: [...state.topics, {id: newId, name: action.name, description: action.description}],
         topicBeingUpdated: true
       };
 
+      let column = result.columns.find((item) => item.id === "toDiscuss")
+      if (column != null)
+        column.topics.push({id: newId})
+      
+        return result;
     case TOPIC_CREATED:
       return {
         ...state,

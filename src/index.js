@@ -7,12 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import createHistory from 'history/createBrowserHistory'
-
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-
 import kanbanReducer from './reducers/kanban'
-
-//import reducer from './reducers'
 
 import './index.css';
 
